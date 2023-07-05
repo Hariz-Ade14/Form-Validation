@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Index.css">
+</head>
+<body>
+
+    <div class="container">
+        <form onSubmit="return Greet()">
+                <h1>Registration Form</h1>
+                <hr></hr>
+                <div className='field'>
+                    <label>Username</label>
+                    <br/>
+                    <input type="text" className='input' name="username" id='name' placeholder='Username'></input>
+                    <br/>
+                    <sub id='SUB'></sub>
+                </div>
+                <div className='field'>
+                    <label>Email</label>
+                    <br/>
+                    <input type="email" className='input' name="email" id='email' placeholder='Email'></input>
+                    <br/>
+                    <sub id='SUB2'></sub>
+                </div>
+                <div className='field'>
+                    <label>Password</label>
+                    <br/>
+                    <input type="password" className='input' name="password" id='pword' placeholder='Password'></input>
+                    <br/>
+                    <sub id='SUB3'></sub>
+                </div>
+                <div className='field'>
+                    <label>Confirm Password</label>
+                    <br/>
+                    <input type="password" className='confirm' name="confirm" id='confirm' placeholder='Confirm Password'></input>
+                    <br/>
+                    <sub id='SUB4'></sub>
+                </div>
+                <button id='btn' type='submit'>Submit</button>
+        </form>
+    </div>
+    <script>
+    
+
+function Greet() {
+        let username = document.getElementById("name");
+        let email = document.getElementById("email");
+        let password = document.getElementById("pword");
+        let confirm = document.getElementById("confirm");
+        let Nplace = username.placeholder;
+        let Eplace = email.placeholder;
+        let Pplace = password.placeholder;
+        let sub = document.getElementById("SUB");
+        let sub2 = document.getElementById("SUB2");
+        let sub3 = document.getElementById("SUB3");
+        let sub4 = document.getElementById("SUB4");
+        let btn = document.getElementById("btn");
+       
+        if(username.value == "" && email.value == "" && password.value == ""){
+                alert("Input Fields cannot be empty");
+        }else if(username.value == "" && email.value !== "" && password.value !== ""){
+                sub.innerHTML = `${Nplace} is invalid`;
+                sub.style.display = "block";
+
+                return false;
+        }else if(username.value !== "" && email.value == "" && password.value !== ""){
+                 sub2.innerHTML = `${Eplace} is invalid`;
+                 sub2.style.display = "block";
+
+                 return false;
+        }else if(username.value !== "" && email.value !== "" && password.value == ""){
+                 sub3.innerHTML = `${Pplace} is empty`;
+                 sub3.style.display = "block";
+
+                 return false;  
+        }else if(username.value !== "" && email.value !== "" && password.value !== "" && (password.value.length < 8 || password.value.length > 15)){
+                 const Ver = () =>{
+                     if(password.value.length < 8){
+                        sub3.innerHTML = "Password cannot be less than 8";
+                     }else if(password.value.length > 10){
+                        sub3.innerHTML = "Password cannot be more than 10";
+                     }else{
+                         return true;
+                     }
+                 }
+                Ver();
+                return false;
+         }else if(password.value !== confirm.value){
+                sub4.innerHTML = "Password deos not match";
+                return false;
+         }
+         else{
+            return true;
+         }          
+   
+}
+
+document.querySelectorAll(".input").addEventListener("click" ,() =>{
+        if(document.querySelectorAll(".input") !== ""){
+            return true;
+        }
+})
+
+
+   </script>
+</body>
+</html>
